@@ -46,6 +46,28 @@ void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
 
   freeList(checked);
 }
+
+/*
+void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
+  // Phase 1
+  struct ArrayList *checked = newArrayList();
+
+  check_errors(input, checked);
+  // same length?
+  ck_assert(size(expectedP1) == size(checked));
+  // same objects?
+  for(int i = 0; i < size(expectedP1); i++){
+    struct Instruction ex = get(expectedP1, i);
+    struct Instruction act = get(checked, i);
+    printf("here instructions>> \n");
+    printInstructions(i, ex, act);
+
+    ck_assert(equal(ex, act));
+  }
+
+  freeList(checked);
+}
+*/
         
 void testHelperPhase2(struct ArrayList *expectedP1, struct ArrayList *expectedP2) {
   // assertion not a test
@@ -84,6 +106,26 @@ void testHelperPhase3(struct ArrayList *expectedP2, uint32_t expectedP3[]) {
 }
 
 START_TEST(test1Phase1) {
+  struct Instruction input[1] = { 
+    label("label1", ADD(8, 0, 0))
+  };
+  // Phase 1
+  struct Instruction phase1_expected[1] = { 
+    label("label1", ADD(8, 0, 0))
+  };
+
+  struct ArrayList *inputL = fromArray(input, 1);
+  struct ArrayList *phase1_expectedL = fromArray(phase1_expected, 1);
+
+  testHelperPhase1(inputL, phase1_expectedL);
+
+  freeList(inputL);
+  freeList(phase1_expectedL);
+}
+END_TEST
+
+/*
+START_TEST(test1Phase1) {
   struct Instruction input[5] = {
     // label1: add R8, R0, R0
     // add R12, R7, R4
@@ -113,7 +155,7 @@ START_TEST(test1Phase1) {
   freeList(phase1_expectedL);
 }
 END_TEST
-
+*/
         
 START_TEST(test1Phase2) {
   // Phase 1
