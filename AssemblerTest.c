@@ -27,26 +27,6 @@ void printMachineCodes(int n, uint32_t ex, uint32_t act) {
   }
 }
 
-void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
-  // Phase 1
-  struct ArrayList *checked = newArrayList();
-
-  check_errors(input, checked);
-  // same length?
-  ck_assert(size(expectedP1) == size(checked));
-  // same objects?
-  for(int i = 0; i < size(expectedP1); i++){
-    struct Instruction ex = get(expectedP1, i);
-    struct Instruction act = get(checked, i);
-    printf("here instructions>> \n");
-    printInstructions(i, ex, act);
-
-    ck_assert(equal(ex, act));
-  }
-
-  freeList(checked);
-}
-
 /*
 void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
   // Phase 1
@@ -68,6 +48,31 @@ void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
   freeList(checked);
 }
 */
+
+void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
+  // Phase 1
+  struct ArrayList *checked = newArrayList();
+
+  check_errors(input, checked);
+  printf("through check_errors \n");
+  printf("size of checked >> %d\n", size(checked));
+  printf("size of expectedP1 >> %d\n", size(expectedP1));
+  // same length?
+  ck_assert(size(expectedP1) == size(checked));
+  printf("sizes compared \n");
+  // same objects?
+  for(int i = 0; i < size(expectedP1); i++){
+    struct Instruction ex = get(expectedP1, i);
+    struct Instruction act = get(checked, i);
+    printf("here instructions>> \n");
+    printInstructions(i, ex, act);
+
+    ck_assert(equal(ex, act));
+  }
+
+  freeList(checked);
+}
+
         
 void testHelperPhase2(struct ArrayList *expectedP1, struct ArrayList *expectedP2) {
   // assertion not a test
@@ -105,6 +110,7 @@ void testHelperPhase3(struct ArrayList *expectedP2, uint32_t expectedP3[]) {
   free(translated);
 }
 
+/*
 START_TEST(test1Phase1) {
   struct Instruction input[1] = { 
     label("label1", ADD(8, 0, 0))
@@ -123,8 +129,8 @@ START_TEST(test1Phase1) {
   freeList(phase1_expectedL);
 }
 END_TEST
+*/
 
-/*
 START_TEST(test1Phase1) {
   struct Instruction input[5] = {
     // label1: add R8, R0, R0
@@ -155,7 +161,7 @@ START_TEST(test1Phase1) {
   freeList(phase1_expectedL);
 }
 END_TEST
-*/
+
         
 START_TEST(test1Phase2) {
   // Phase 1

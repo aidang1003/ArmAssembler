@@ -12,15 +12,21 @@ void check_errors(struct ArrayList *unchecked, struct ArrayList *checked) {
   cap = unchecked->capacity;
   printf("cap >> %d \n", cap);
   */
+  
   checked = unchecked;
   
-  printf("size >> %d \n", size(checked));
-  printf("size >> %d \n", size(unchecked));
+  //printf("size of checked >> %d \n", size(checked));
+  //printf("size of unchecked >> %d \n", size(unchecked));
+  
+ 
+  //struct Instruction *UnChInstr;
+  //struct Instruction *chInstr;
+  
+  struct Instruction Instr = get(unchecked, 1);
+  addLast(checked, Instr);
+  
   
   /*
-  struct Instruction *UnChInstr;
-  struct Instruction *chInstr;
-  
   for (int i = 0; i < 5 ; i++) {
     *UnChInstr = unchecked->elements[i];
     int32_t imm = UnChInstr->immediate;
@@ -31,6 +37,8 @@ void check_errors(struct ArrayList *unchecked, struct ArrayList *checked) {
     // printf("Immediate %d >> %d \n", i, imm);
   }
   */
+  
+
   
   //struct Instruction *input = unchecked->elements;
   //struct Instruction *inputcheck = checked->elements;
