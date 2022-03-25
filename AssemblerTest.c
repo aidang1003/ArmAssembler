@@ -38,6 +38,7 @@ void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
   for(int i = 0; i < size(expectedP1); i++){
     struct Instruction ex = get(expectedP1, i);
     struct Instruction act = get(checked, i);
+    printf("here instructions>> \n");
     printInstructions(i, ex, act);
 
     ck_assert(equal(ex, act));
@@ -112,6 +113,7 @@ START_TEST(test1Phase1) {
   freeList(phase1_expectedL);
 }
 END_TEST
+
         
 START_TEST(test1Phase2) {
   // Phase 1
@@ -821,6 +823,8 @@ START_TEST(test11Phase3) {
 }
 END_TEST
 
+
+
 Suite * phase1_suite(void)
 {
     Suite *s;
@@ -832,16 +836,16 @@ Suite * phase1_suite(void)
     tc_core = tcase_create("Core");
 
     tcase_add_test(tc_core, test1Phase1);
-    tcase_add_test(tc_core, test2Phase1);
-    tcase_add_test(tc_core, test3Phase1);
-    tcase_add_test(tc_core, test4Phase1);
-    tcase_add_test(tc_core, test5Phase1);
-    tcase_add_test(tc_core, test6Phase1);
-    tcase_add_test(tc_core, test7Phase1);
-    tcase_add_test(tc_core, test8Phase1);
-    tcase_add_test(tc_core, test9Phase1);
-    tcase_add_test(tc_core, test10Phase1);
-    tcase_add_test(tc_core, test11Phase1);
+    //tcase_add_test(tc_core, test2Phase1);
+    //tcase_add_test(tc_core, test3Phase1);
+    //tcase_add_test(tc_core, test4Phase1);
+    //tcase_add_test(tc_core, test5Phase1);
+    //tcase_add_test(tc_core, test6Phase1);
+    //tcase_add_test(tc_core, test7Phase1);
+    //tcase_add_test(tc_core, test8Phase1);
+    //tcase_add_test(tc_core, test9Phase1);
+    //tcase_add_test(tc_core, test10Phase1);
+    //tcase_add_test(tc_core, test11Phase1);
 
     suite_add_tcase(s, tc_core);
 
@@ -910,6 +914,7 @@ int main(void)
     srunner_free(sr);
     printf("Phase 1: # of failed: %d\n", number_failed);
     }
+    /*
     // Phase 2
     {
     int number_failed;
@@ -938,5 +943,6 @@ int main(void)
     srunner_free(sr);
     printf("Phase 3: # of failed: %d\n", number_failed);
     }
+    */
 }
 
