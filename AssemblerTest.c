@@ -55,16 +55,16 @@ void testHelperPhase1(struct ArrayList *input, struct ArrayList *expectedP1) {
 
   check_errors(input, checked);
   printf("through check_errors \n");
-  printf("size of checked >> %d\n", size(checked));
-  printf("size of expectedP1 >> %d\n", size(expectedP1));
+  //printf("size of checked >> %d\n", size(checked));
+  //printf("size of expectedP1 >> %d\n", size(expectedP1));
   // same length?
   ck_assert(size(expectedP1) == size(checked));
-  printf("sizes compared \n");
+  //printf("sizes compared \n");
   // same objects?
   for(int i = 0; i < size(expectedP1); i++){
     struct Instruction ex = get(expectedP1, i);
     struct Instruction act = get(checked, i);
-    printf("here instructions>> \n");
+    //printf("here instructions>> \n");
     printInstructions(i, ex, act);
 
     ck_assert(equal(ex, act));
@@ -109,27 +109,6 @@ void testHelperPhase3(struct ArrayList *expectedP2, uint32_t expectedP3[]) {
   
   free(translated);
 }
-
-/*
-START_TEST(test1Phase1) {
-  struct Instruction input[1] = { 
-    label("label1", ADD(8, 0, 0))
-  };
-  // Phase 1
-  struct Instruction phase1_expected[1] = { 
-    label("label1", ADD(8, 0, 0))
-  };
-
-  struct ArrayList *inputL = fromArray(input, 1);
-  struct ArrayList *phase1_expectedL = fromArray(phase1_expected, 1);
-
-  testHelperPhase1(inputL, phase1_expectedL);
-
-  freeList(inputL);
-  freeList(phase1_expectedL);
-}
-END_TEST
-*/
 
 START_TEST(test1Phase1) {
   struct Instruction input[5] = {
@@ -314,12 +293,12 @@ START_TEST(test3Phase1) {
     //add R12, R4, #0x4080
   struct Instruction input[7] = {
     ADDI(12, 4, 0x520),
-    ADDI(12, 4, 0x1020),
+    ADDI(12, 4, 0x1020), //invalid
     ADDI(12, 4, 0x1040),
     ADDI(12, 4, 0x1040),
     ADDI(12, 4, 0x1080),
     ADDI(12, 4, 0x2080),
-    ADDI(12, 4, 0x4080),
+    ADDI(12, 4, 0x4080), //invalid
   };
 
   // Phase 1
@@ -883,9 +862,9 @@ Suite * phase1_suite(void)
     // Core test case 
     tc_core = tcase_create("Core");
 
-    tcase_add_test(tc_core, test1Phase1);
+    //tcase_add_test(tc_core, test1Phase1);
     //tcase_add_test(tc_core, test2Phase1);
-    //tcase_add_test(tc_core, test3Phase1);
+    tcase_add_test(tc_core, test3Phase1);
     //tcase_add_test(tc_core, test4Phase1);
     //tcase_add_test(tc_core, test5Phase1);
     //tcase_add_test(tc_core, test6Phase1);
